@@ -7,6 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'  // without this line it didn't work
 import CalendarEvent from './CalendarEvent';
 import { useState } from 'react';
+import CalendarModal from './CalendarModal';
 
 moment.locale('es');
 
@@ -74,6 +75,8 @@ const CalendarScreen = () => {
           event: CalendarEvent
         }}
       />
+
+      <CalendarModal/>
     </div>
   )
 }
