@@ -6,6 +6,7 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'  // without this line it didn't work
 import CalendarEvent from './CalendarEvent';
+import { useState } from 'react';
 
 moment.locale('es');
 
@@ -20,8 +21,26 @@ const events = [{
     _id: '123',
     name: 'Luis Vanegas'
   }
-}]
+}];
+
+
 const CalendarScreen = () => {
+
+  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+
+  const onDoubleClick = (e) => {
+    console.log(e);
+  }
+
+  const onSelectEvent = (e) => {
+    console.log(e);
+  }
+
+  const onViewChange = (e) => {
+    console.log(e);
+    setLastView(e);
+    localStorage.setItem('lastView', e);
+  }
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     let backgroundColor = '#367cf7';
@@ -47,6 +66,10 @@ const CalendarScreen = () => {
         endAccessor='end'
         messages={messages}
         eventPropGetter={eventStyleGetter}
+        onSelectEvent={onSelectEvent}
+        onView={onViewChange}
+        onDoubleClickEvent={onDoubleClick}
+        view={lastView}
         components={{
           event: CalendarEvent
         }}
